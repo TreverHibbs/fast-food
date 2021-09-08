@@ -19,3 +19,36 @@ library(readxl)
 fast_food  <-  read_excel(path="./Copy of FastFoodHW.xlsx", sheet="FastFood")
 summary(fast_food)
 ```
+
+```{r import dplyr and find mean of calories}
+library(dplyr)
+by_restaurant <- fast_food %>%
+  group_by(restaurant)
+```
+
+```{r average calories by restaurant}
+summary <- by_restaurant %>% summarise(
+  cal_avg = mean(calories),
+  cal_stddev = sd(calories),
+  sod_avg = mean(sodium),
+  sod_stddev = sd(sodium)
+)
+summary
+```
+
+```{r get max averages and max standard deviations}
+max_cal_avg_row <- summary %>% 
+  slice_max(cal_avg)
+max_cal_stddev_row <- summary %>%
+  slice_max(cal_stddev)
+max_sod_avg_row <- summary %>%
+  slice_max(sod_avg)
+max_sod_stddev_row <- summary %>%
+  slice_max(sod_stddev)
+
+max_cal_avg_row %>% select(restaurant, cal_avg)
+max_cal_stddev_row %>% select(restaurant, cal_stddev)
+max_sod_avg_row %>% select(restaurant, sod_avg)
+max_sod_stddev_row %>% select(restaurant, sod_stddev)
+```
+
