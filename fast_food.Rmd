@@ -1,0 +1,21 @@
+---
+title: "Untitled"
+output:
+  html_document:
+    toc: true
+    fig_caption: true
+---
+
+## Overview
+```{r hello world}
+hello <- "hello world"
+hello
+```
+
+
+## Analysis
+```{r fast_food import}
+library(readxl)
+fast_food  <-  read_excel(path="./Copy of FastFoodHW.xlsx", sheet="FastFood")
+summary(fast_food)
+```
